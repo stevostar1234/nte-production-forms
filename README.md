@@ -1,30 +1,36 @@
 # NTE forms — production Salesforce
 
-Client testing site: https://stevostar1234.github.io/nte-production-forms/
+Production forms site: https://stevostar1234.github.io/nte-production-forms/
 
 Ten NTE forms, in journey order: two expressions of interest; partner/sponsor,
 delivery-partner and exhibitor applications; four booking updates; guest
 registration. The staff chooser and thank-you page support those forms.
 Volunteers are outside this release.
 
-## Current testing configuration
+## Current production configuration
 
-Submissions create records in **production Salesforce**, not MMUAT. Use fictional
-applicant details and the agreed test mailbox. Stripe is currently configured
-for the client's Stripe sandbox; these forms do not choose Stripe mode.
+Submissions create records in **production Salesforce**. NTE uses live Stripe;
+payments are real. These forms do not choose the Stripe mode.
 
-The three application forms show independent required privacy and terms
-checkboxes. Final Terms & Conditions are awaited. The owner explicitly approved
-showing unlinked terms for client testing, using the existing
-`NTE_Booking_Terms_Accepted__c` checkbox field. The exception is
-`allowUnlinkedTermsForTesting: true` in `assets/config.js`. Test ticks are not
-acceptance of the client's final terms and must not be carried forward as such.
+The three application forms require separate privacy and terms checkboxes.
+Kate's original 12 October 2026 PDFs are hosted unchanged in `assets/documents/`.
+`termsUrls.exhibitor` selects exhibitor terms; `termsUrls.partnerSponsor` selects
+partner/sponsor terms. The owner explicitly chose partner/sponsor terms for
+Delivery Partners too. `data-terms-type` selects the document for each form.
 
-Before public launch, set `termsUrl` to the approved terms document and set
-`allowUnlinkedTermsForTesting: false`; regenerate the inline package from the
-same files. Ordinary production configuration blocks application submission if
-terms are missing. Privacy uses its own existing link and field. No new
-Salesforce consent field or picklist is required.
+`allowUnlinkedTermsForTesting` is false. Missing audience terms block application
+submission; one audience cannot silently fall back to the other document.
+The terms checkbox sends `1` to `NTE_Booking_Terms_Accepted__c`; privacy sends `1`
+to `NTE_Privacy_Accepted__c`. Production's existing conversion flow preserves
+them separately. Historical testing ticks are not relabelled as final consent.
+Application form versions identify this release: exhibitor v14, partner v15,
+and Delivery Partner v3. No Salesforce field or record changes accompany it.
+
+PDF links open separately; PDF bytes are not embedded in Squarespace code
+blocks. When the client provides their hosted PDF URLs, update `termsUrls`
+and regenerate the inline bundle. The brochure and final client form URLs
+remain outstanding. These terms are specific to NTE27 and need client review
+before reuse for a later event.
 
 The site is excluded from search indexing but is publicly accessible. Do not
 upload Salesforce exports, credentials, applicant data or private audit files.

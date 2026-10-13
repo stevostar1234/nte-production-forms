@@ -49,3 +49,17 @@ https://stevostar1234.github.io/nte27-web-to-lead-demo/ .
 No pricing, payment workflow or shared Mission layouts are changed by this
 website distribution. The existing native production configuration determines
 email timing, booking workflow and Stripe mode.
+
+## Brochure handover
+
+The package section opens the stable `partner-sponsor-brochure.html` URL in a
+new tab. That page redirects to `assets/documents/nte27-partner-sponsor-brochure.pdf`.
+The PDF is intentionally one blank page, explicitly requested by the owner
+pending Laura's final brochure. It provides no package information yet.
+
+To publish the brochure, replace that PDF at the same path. Alternatively,
+change both URLs in the redirect page to the client's approved hosted PDF URL.
+The installed forms need no edit because they retain the stable landing URL.
+If browsers retain an older PDF briefly, add a new revision query to both
+redirect targets, then verify a fresh anonymous visit. Publish and verify the
+finished document before telling applicants to consult the brochure.
